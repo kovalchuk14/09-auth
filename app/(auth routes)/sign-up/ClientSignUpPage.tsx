@@ -7,9 +7,11 @@ import { ApiError } from "@/app/api/api";
 import { register } from "@/lib/api/clientApi";
 import { RegisterRequest } from "@/types/user";
 import { useRouter } from "next/navigation";
+import { useSessionStore } from "@/lib/store/authStore";
 export default function ClientSignUpPage() {
-  const router = useRouter();
-  const [error, setError] = useState('');
+    const router = useRouter();
+    const [error, setError] = useState('');
+    const { setUser } = useSessionStore();
 
     const handleSubmit = async (formData: FormData) => {
         try {
@@ -17,6 +19,7 @@ export default function ClientSignUpPage() {
             const res = await register(formValues);
             // Виконуємо редірект або відображаємо помилку
             if (res) {
+                setUser(res);
                 router.push('/profile');
             } else {
                 setError('Invalid email or password');
