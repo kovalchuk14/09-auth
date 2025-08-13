@@ -3,26 +3,17 @@ import { User } from "@/types/user";
 import { persist } from "zustand/middleware";
 
 type SessionStore = {
-    user: User;
+    user: User|null;
     isAuthenticated: boolean;
     setUser: (user: User) => void;
     clearIsAuthenticated: () => void;
 };
 
-const initialData: User = {
-    id:"",
-    email:"",
-    userName:"",
-    photoUrl: "",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-
-};
 
 export const useSessionStore = create<SessionStore>()(
     persist(
         (set) => ({
-            user: initialData,
+            user: null,
             isAuthenticated: false,
             setUser: (user) => set(() => ({
                 user: user,
@@ -30,7 +21,7 @@ export const useSessionStore = create<SessionStore>()(
              })),
             clearIsAuthenticated: () => set(() => ({
                 isAuthenticated: false,
-                user: initialData,
+                user: null,
             })),
         }),
         {
