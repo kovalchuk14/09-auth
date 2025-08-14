@@ -16,7 +16,7 @@ export const logout = async (): Promise<void> => {
 };
 
 export const getMe = async () => {
-  const { data } = await nextServer.get<User>('/auth/me');
+  const { data } = await nextServer.get<User>('/users/me');
   return data;
 };
 
