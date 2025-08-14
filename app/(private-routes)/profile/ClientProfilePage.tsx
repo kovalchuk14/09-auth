@@ -13,7 +13,7 @@ export default function ClientProfilePage() {
   <div className={css.profileCard}>
       <div className={css.header}>
 	     <h1 className={css.formTitle}>Profile Page</h1>
-	     <Link href="/" className={css.editProfileButton}>
+	     <Link href="/profile/edit" className={css.editProfileButton}>
 	       Edit Profile
 	     </Link>
 	   </div>
@@ -28,10 +28,10 @@ export default function ClientProfilePage() {
     </div>
     <div className={css.profileInfo}>
       <p>
-        Username: {user?.userName ? user.userName : "No username"};
+        Username: {user?.username ? user.username : "No username"};
       </p>
       <p>
-              Email: { user?.email}
+        Email: { user?.email}
       </p>
     </div>
   </div>
