@@ -1,7 +1,7 @@
 import {
   QueryClient,
 } from "@tanstack/react-query";
-import { FetchHttpResponse, fetchNotes } from "@/lib/api";
+import { FetchHttpResponse, fetchNotes } from "@/lib/api/clientApi";
 import NotesClient from "./Notes.client";
 import { Metadata } from "next";
 

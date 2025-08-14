@@ -1,6 +1,6 @@
 import { RegisterRequest, User } from "@/types/user";
 import { nextServer } from "./api";
-import { Note } from "@/types/note";
+import { Note, NoteInputValues } from "@/types/note";
 
 
 
@@ -66,6 +66,32 @@ export async function fetchNotes(searchText: string, tag:string|undefined, page:
   const res = await nextServer.get<FetchHttpResponse>('/notes', {
             params
         },);
+  return res.data;
+}
+
+
+export async function createNote(note: NoteInputValues): Promise<Note> {
+    const res = await nextServer.post('/notes', note);
+    return res.data;
+}
+
+export async function deleteNote(id: string): Promise<Note> {
+  const res = await nextServer.delete(`/notes/${id}`);
+    return res.data;
+}
+
+export async function fetchNoteById(id: string): Promise<Note>{
+    const res = await nextServer.get(`/notes/${id}`);
+    return res.data;
+}
+
+export async function fetchNotesByTag(tag?:string):Promise<FetchHttpResponse> {
+  const res = await nextServer.get(`/notes`, {
+    params: {
+      tag,
+      perPage: 12
+  } 
+  });
   return res.data;
 }
 
