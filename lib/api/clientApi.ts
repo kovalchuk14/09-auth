@@ -9,7 +9,7 @@ export interface FetchHttpResponse {
     totalPages:number,
 }
 
-interface FetchParams {
+export interface FetchParams {
     search?: string,
     tag:string|undefined,
   page: number,
@@ -51,7 +51,6 @@ export const changeName = async (username:string,email?: string) => {
 }
 
 
-
 export async function fetchNotes(searchText: string, tag:string|undefined, page: number, ):Promise<FetchHttpResponse> {
     const params:FetchParams = {
         page,
@@ -68,6 +67,7 @@ export async function fetchNotes(searchText: string, tag:string|undefined, page:
         },);
   return res.data;
 }
+
 
 
 export async function createNote(note: NoteInputValues): Promise<Note> {

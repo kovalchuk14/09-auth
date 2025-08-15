@@ -1,9 +1,10 @@
 import {
   QueryClient,
 } from "@tanstack/react-query";
-import { FetchHttpResponse, fetchNotes } from "@/lib/api/clientApi";
+import { FetchHttpResponse } from "@/lib/api/clientApi";
 import NotesClient from "./Notes.client";
 import { Metadata } from "next";
+import { fetchNotes } from "@/lib/api/serverApi";
 
 
 type Props = {
