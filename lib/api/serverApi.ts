@@ -4,26 +4,18 @@ import { Note } from '@/types/note';
 import { FetchHttpResponse, FetchParams } from './clientApi';
 import { User } from '@/types/user';
 
-export const checkServerSession = async ({
-  accessToken,
-  refreshToken,
-}: {
-  accessToken?: string;
-  refreshToken?: string;
-}) => {
-  const res = await nextServer.get("/auth/session", {
+export const checkServerSession = async () => {
+  // Дістаємо поточні cookie
+  const cookieStore = await cookies();
+  const res = await nextServer.get('/auth/session', {
     headers: {
-      Cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`,
+      // передаємо кукі далі
+      Cookie: cookieStore.toString(),
     },
   });
-  const responseAccessToken = res.headers["set-cookie"]?.[0].split(";")[0];
-  const responseRefreshToken = res.headers["set-cookie"]?.[1].split(";")[0];
-  return {
-    accessToken: responseAccessToken,
-    refreshToken: responseRefreshToken,
-  };
+  // Повертаємо повний респонс, щоб middleware мав доступ до нових cookie
+  return res;
 };
-
 
 export async function fetchNoteById(id: string): Promise<Note>{
   const cookieStore = await cookies()
